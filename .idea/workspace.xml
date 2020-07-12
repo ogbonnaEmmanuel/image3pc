@@ -10,15 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69274acc-3a8e-4259-92a1-78e621e996e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/Features/CurrentTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Features/CurrentTab.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/FeautureUi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/FeautureUi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/StaticUi/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/StaticUi/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/StaticUi/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/StaticUi/upload.js" afterDir="false" />
-    </list>
+    <list default="true" id="69274acc-3a8e-4259-92a1-78e621e996e0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
