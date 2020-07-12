@@ -19,7 +19,7 @@ class UploadUi extends React.Component {
             userImageText: imageName
         })
         let actions = this.props.imageAction;
-        let operation_type = actions['type'];
+        let operation_type = actions['user_type'];
         let operations = actions['operations'];
         const formData = new FormData();
         const fileField = document.querySelector('input[type="file"]');

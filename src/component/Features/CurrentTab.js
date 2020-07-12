@@ -32,7 +32,6 @@ class ClickedTabUi extends React.Component {
             })
             updateOrNot = true;
         }
-        console.log(this.state)
         this.props.user_operation(this.state);
         return updateOrNot
     })

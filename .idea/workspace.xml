@@ -10,7 +10,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69274acc-3a8e-4259-92a1-78e621e996e0" name="Default Changelist" comment="" />
+    <list default="true" id="69274acc-3a8e-4259-92a1-78e621e996e0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Features/CurrentTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Features/CurrentTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/FeautureUi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/FeautureUi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/StaticUi/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/StaticUi/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/StaticUi/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/StaticUi/upload.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +61,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -74,6 +83,8 @@
       <workItem from="1594411194588" duration="28666000" />
       <workItem from="1594553091465" duration="1334000" />
       <workItem from="1594557203456" duration="706000" />
+      <workItem from="1594559464434" duration="1463000" />
+      <workItem from="1594561122806" duration="2015000" />
     </task>
     <servers />
   </component>
@@ -108,6 +119,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1594439857042" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1594560938574">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1594560938574" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1594560938573">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1594560938573" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1594560938573">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1594560938573" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1594560938574">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1594560938574" />
     <state x="466" y="97" key="VcsDiffUtil.ChangesDialog" timestamp="1594439008443">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

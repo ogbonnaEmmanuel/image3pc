@@ -26,6 +26,7 @@ class FeatureUi extends React.Component {
     })
 
     updateOperation = (operationsOnImage => {
+        console.log(operationsOnImage)
         this.setState({
             operationsOnImage
         })
