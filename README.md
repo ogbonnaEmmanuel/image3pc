@@ -1,2 +1,2 @@
-## image3pc
+# IMAGE3PC
 hybrid image responsive web application
