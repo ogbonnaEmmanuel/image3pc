@@ -13,27 +13,42 @@ class ClickedTabUi extends React.Component {
         }
     }
 
-    updateImageAction = ((operation, user_type) => {
+    singleOperation = ((operation, user_type) => {
         let updateOrNot = false;
         let current_user_operation = this.state;
-        if(operation in current_user_operation.operations)
-        {
+        if (operation in current_user_operation.operations) {
             delete current_user_operation.operations[operation];
             this.setState({
                 operations: current_user_operation.operations
             })
 
-        }else{
+        } else {
             current_user_operation.user_type = user_type;
             current_user_operation.operations[operation] = operation
             this.setState({
                 user_type: current_user_operation.user_type,
-                operations:current_user_operation.operations
+                operations: current_user_operation.operations
             })
             updateOrNot = true;
         }
         this.props.user_operation(this.state);
         return updateOrNot
+    })
+
+    multiOperation = ((select_state) => {
+        if (select_state) {
+
+        } else {
+
+        }
+    })
+
+    updateImageAction = ((operation, user_type, select_type) => {
+        if (select_type === 'single') {
+            return this.singleOperation(operation, user_type);
+        } else {
+            this.multiOperation(select_type);
+        }
     })
 
 

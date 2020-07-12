@@ -1,6 +1,7 @@
 import React from "react";
 import SelectAllFeatures from "./select_all_features";
 import {REGISTERED_FEATURES} from "./registered_features";
+import {SELECT_ALL_UPDATE} from "./utils";
 
 class WebUi extends React.Component {
 
@@ -8,13 +9,13 @@ class WebUi extends React.Component {
         super(props);
         this.action_indicator = this.action_indicator.bind(this);
         this.state = {
-            select_all: false
+            select_all: true
         }
     }
 
     action_indicator = ((e) => {
         let operation = e.target.id;
-        let updateOrNot = this.props.action(operation, 'Web');
+        let updateOrNot = this.props.action(operation, 'Web', 'single');
         if (updateOrNot) {
             document.getElementById(operation).style.border = "4px solid green";
         } else {
@@ -22,21 +23,17 @@ class WebUi extends React.Component {
         }
     })
 
-    get_all_features = (()=>{
+    get_all_features = (() => {
         return REGISTERED_FEATURES.Web.ALL
     })
 
     select_all = (() => {
-        let user_action_style = ''
-        if (this.state.select_all) {
-            user_action_style = "4px solid green";
-        } else {
-            user_action_style = "0px"
-        }
-        let features = REGISTERED_FEATURES.Web.ALL;
-        features.forEach(feature => {
-            document.getElementById(feature).style.border = user_action_style;
+        let select_all = SELECT_ALL_UPDATE(this.state.select_all, 'Web');
+        this.setState({
+            select_all
         })
+        //change of state from return select_all which always negate on return
+        select_all ? this.props.action(null, 'Web', null) : this.props.action(null, 'Web', 'multi')
     })
 
     render() {
