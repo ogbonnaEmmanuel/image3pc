@@ -4,7 +4,6 @@
 /api/venv
 /node_modules
 /.idea/workspace.xml
-
 /.pnp
 .pnp.js
 

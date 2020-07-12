@@ -26,17 +26,24 @@ class UploadUi extends React.Component {
         let userAction = MAP_STRING_TO_DATA(operations, operation_type);
         formData.append('actions', userAction);
         formData.append('avatar', fileField.files[0]);
-        fetch(API_URL_MAP[operation_type], {
-            method: 'PUT',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(result => {
-                console.log('Success:', result);
+        if (operation_type) {
+            fetch(API_URL_MAP[operation_type], {
+                method: 'PUT',
+                body: formData
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }else {
+            let userImageText = 'Please choose an option';
+            this.setState({
+                userImageText
+            })
+        }
     }
 
     render() {

@@ -6,16 +6,25 @@ export const REGISTERED_FEATURES = {
         'XHDPI': {name: 'XHDPI', string_rep: '4'},
         'XXHDPI': {name: 'XXHDPI', string_rep: '5'},
         'XXXHDPI': {name: 'XXXHDPI', string_rep: '6'},
-        'ALL': [
+        ALL: [
             {name: 'LDPI', size: "(36 x 36)"}, {name: 'MDPI', size: "(48 x 48)"},
             {name: 'HDPI', size: "(72 x 72)"}, {name: 'XHDPI', size: "(96 x 96)"},
             {name: 'XXHDPI', size: "(144 x 144)"}, {name: 'XXXHDPI', size: "(192 x 192)"}
-        ]
+        ],
+        SELECT_ALL: {
+            'LDPI': 'LDPI',
+            'MDPI': 'MDPI',
+            'HDPI': 'HDPI',
+            'XHDPI': 'XHDPI',
+            'XXHDPI': 'XXHDPI',
+            'XXXHDPI': 'XXXHDPI',
+        }
     },
     Web: {
         'Compress image': {name: 'Compress image', string_rep: '1'},
         'Resize image': {name: 'Resize image', string_rep: '2'},
-        'ALL': ['Compress image', 'Resize image']
+        ALL: ['Compress image', 'Resize image'],
+        SELECT_ALL: {'Compress image': 'Compress image', 'Resize image': 'Resize image'}
     },
     Ios: {
         '@X': {name: '@X', string_rep: '1'},
@@ -24,6 +33,11 @@ export const REGISTERED_FEATURES = {
         'ALL': [
             {name: '@X', size: "(100 x 100)"}, {name: '@2X', size: "(200 x 200)"},
             {name: '@3X', size: "(300 x 300)"}
-        ]
+        ],
+        SELECT_ALL: {
+            '@X': '@X',
+            '@2X': '@2X',
+            '@3X': '@3X',
+        }
     }
 }

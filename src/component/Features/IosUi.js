@@ -1,11 +1,16 @@
 import React from "react";
 import {REGISTERED_FEATURES} from "./registered_features";
+import {SELECT_ALL_UPDATE} from "./utils";
+import SelectAllFeatures from "./select_all_features";
 
 class IosUi extends React.Component {
 
     constructor(props) {
         super(props);
         this.action_indicator = this.action_indicator.bind(this);
+        this.state = {
+            select_all: true
+        }
     }
 
     action_indicator = ((e) => {
@@ -16,6 +21,14 @@ class IosUi extends React.Component {
         } else {
             document.getElementById(operation).style.border = "0px";
         }
+    })
+
+    select_all = (() => {
+        let select_all = SELECT_ALL_UPDATE(this.state.select_all, 'Ios');
+        this.setState({
+            select_all
+        })
+        this.props.action(null, 'Ios', 'multi')
     })
 
     render() {
@@ -37,6 +50,7 @@ class IosUi extends React.Component {
                 <div className="center_element">
                     <p className="feature_text">SELECT IMAGE FEATURE FOR IOS</p>
                 </div>
+                <SelectAllFeatures select_all={this.select_all}/>
                 {all_features()}
                 <div className="center_element">
                     <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/"

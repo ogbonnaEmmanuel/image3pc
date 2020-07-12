@@ -12,8 +12,8 @@ class FeatureUi extends React.Component {
         this.state = {
             currentHeaderFocus: 'web_color',
             operationsOnImage: {
-                type: '',
-                operations: {}
+                user_type: '',
+                operations: {},
             }
         }
     }
