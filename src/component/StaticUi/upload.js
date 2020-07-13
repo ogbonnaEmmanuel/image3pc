@@ -1,6 +1,13 @@
 import React from "react";
-import ImageProcess from "../process.mp4";
+import {css} from "@emotion/core";
 import {API_URL_MAP, MAP_STRING_TO_DATA} from "./api"
+import {HashLoader} from "react-spinners";
+
+const override = css`
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
 
 class UploadUi extends React.Component {
 
@@ -9,9 +16,11 @@ class UploadUi extends React.Component {
         this.handleFile = this.handleFile.bind(this);
         this.userData = this.userData.bind(this);
         this.makeApiRequest = this.makeApiRequest.bind(this);
+        this.uploadIcon = this.uploadIcon.bind(this);
         this.state = {
             userImageText: 'CHOOSE IMAGE',
             loading: false,
+            fileUpload: true
         }
     }
 
@@ -28,41 +37,76 @@ class UploadUi extends React.Component {
         }
     }
 
-    makeApiRequest = () => {
-        let actions = this.props.imageAction;
-        let operation_type = actions['user_type'];
-        let operations = actions['operations'];
-        const fileField = document.querySelector('input[type="file"]');
-        let userAction = MAP_STRING_TO_DATA(operations, operation_type);
+    generateDownloadUrl(url) {
+        this.setState({
+            loading: false
+        })
+        console.log('Success:', url);
+        window.location.reload(false);
+    }
+
+    process_Started(Has_it) {
+        if (Has_it) {
+            this.setState({
+                fileUpload: false
+            })
+            return ''
+        }
+        this.setState({
+            fileUpload: true
+        })
+    }
+
+    uploadIcon() {
+        if (this.state.fileUpload) {
+            return (
+                <label htmlFor="file" id="file_label">
+                            <span className="material-icons icon_insert" id="insert">
+                                            folder_open
+                            </span>
+                </label>
+            )
+        }
+    }
+
+    makeApiRequest() {
+        let userData = this.userData();
         const formData = new FormData();
-        formData.append('actions', userAction);
-        formData.append('avatar', fileField[0]);
-        if (operation_type) {
-            fetch(API_URL_MAP[operation_type], {
+        formData.append('actions', userData.userAction);
+        formData.append('avatar', userData.fileField.files[0]);
+        if (userData.operation_type) {
+            fetch(API_URL_MAP[userData.operation_type], {
                 method: 'PUT',
                 body: formData
             })
                 .then(response => response.json())
                 .then(result => {
-                    console.log('Success:', result);
+                    this.generateDownloadUrl(result);
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         } else {
-            let userImageText = 'Please choose an option';
+            let userImageText = 'Please select an option';
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 2000);
+            this.process_Started(false);
             this.setState({
-                userImageText
+                userImageText,
+                loading: false,
             })
         }
     }
 
     handleFile = (e) => {
         let userImageText = `Processing ${e.target.files[0]['name']} .....`;
+        //start process to process file
         this.setState({
             userImageText,
             loading: true,
         })
+        this.process_Started(true);
         this.makeApiRequest();
     }
 
@@ -84,11 +128,12 @@ class UploadUi extends React.Component {
                     <input type="file" id="file" accept=".png,.jpg,.jpeg"
                            onChange={this.handleFile}/>
                     <div className="center_element">
-                        <label htmlFor="file" id="file_label">
-                            <span className="material-icons icon_insert" id="insert">
-                                            folder_open
-                            </span>
-                        </label>
+                        <HashLoader
+                            css={override}
+                            size={90}
+                            color={"#fff"}
+                            loading={this.state.loading}/>
+                        {this.uploadIcon()}
                     </div>
                 </div>
             </div>
