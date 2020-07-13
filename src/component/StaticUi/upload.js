@@ -7,31 +7,29 @@ class UploadUi extends React.Component {
     constructor(props) {
         super(props);
         this.handleFile = this.handleFile.bind(this);
+        this.userData = this.userData.bind(this);
+        this.makeApiRequest = this.makeApiRequest.bind(this);
         this.state = {
             userImageText: 'CHOOSE IMAGE',
             loading: false,
         }
     }
 
-    handleFile = (e) => {
-        let userImageText = `Processing ${e.target.files[0]['name']} .....`;
-        //start process to process file
-        let defaultProcess = document.getElementById('insert');
-        let currentProcess = document.getElementById('img_process');
-        defaultProcess.style.display = 'none';
-        currentProcess.style.display = 'block';
-        this.setState({
-            userImageText,
-            loading: true,
-        })
+    userData = () => {
         let actions = this.props.imageAction;
         let operation_type = actions['user_type'];
         let operations = actions['operations'];
-        const formData = new FormData();
         const fileField = document.querySelector('input[type="file"]');
         let userAction = MAP_STRING_TO_DATA(operations, operation_type);
-        formData.append('actions', userAction);
-        formData.append('avatar', fileField.files[0]);
+        return {
+            actions: actions, operation_type: operation_type,
+            operations: operations, fileField: fileField,
+            userAction: userAction
+        }
+    }
+
+    makeApiRequest = (formData,operation_type) => {
+        console.log(formData,operation_type)
         if (operation_type) {
             fetch(API_URL_MAP[operation_type], {
                 method: 'PUT',
@@ -50,6 +48,19 @@ class UploadUi extends React.Component {
                 userImageText
             })
         }
+    }
+
+    handleFile = (e) => {
+        let userImageText = `Processing ${e.target.files[0]['name']} .....`;
+        this.setState({
+            userImageText,
+            loading: true,
+        })
+        let userData = this.userData();
+        const formData = new FormData();
+        formData.append('actions', userData.userAction);
+        formData.append('avatar', userData.fileField[0]);
+        this.makeApiRequest(formData,userData.operation_type);
     }
 
     render() {
@@ -71,8 +82,6 @@ class UploadUi extends React.Component {
                            onChange={this.handleFile}/>
                     <div className="center_element">
                         <label htmlFor="file" id="file_label">
-                            <video autoPlay loop muted playsInline src={ImageProcess}
-                                   id="img_process"/>
                             <span className="material-icons icon_insert" id="insert">
                                             folder_open
                             </span>
