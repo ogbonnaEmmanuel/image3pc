@@ -28,8 +28,15 @@ class UploadUi extends React.Component {
         }
     }
 
-    makeApiRequest = (formData,operation_type) => {
-        console.log(formData,operation_type)
+    makeApiRequest = () => {
+        let actions = this.props.imageAction;
+        let operation_type = actions['user_type'];
+        let operations = actions['operations'];
+        const fileField = document.querySelector('input[type="file"]');
+        let userAction = MAP_STRING_TO_DATA(operations, operation_type);
+        const formData = new FormData();
+        formData.append('actions', userAction);
+        formData.append('avatar', fileField[0]);
         if (operation_type) {
             fetch(API_URL_MAP[operation_type], {
                 method: 'PUT',
@@ -56,11 +63,7 @@ class UploadUi extends React.Component {
             userImageText,
             loading: true,
         })
-        let userData = this.userData();
-        const formData = new FormData();
-        formData.append('actions', userData.userAction);
-        formData.append('avatar', userData.fileField[0]);
-        this.makeApiRequest(formData,userData.operation_type);
+        this.makeApiRequest();
     }
 
     render() {
