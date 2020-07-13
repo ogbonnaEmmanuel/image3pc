@@ -4,19 +4,25 @@ import {API_URL_MAP, MAP_STRING_TO_DATA} from "./api"
 
 class UploadUi extends React.Component {
 
-    state = {
-        userImageText: 'CHOOSE IMAGE',
+    constructor(props) {
+        super(props);
+        this.handleFile = this.handleFile.bind(this);
+        this.state = {
+            userImageText: 'CHOOSE IMAGE',
+            loading: false,
+        }
     }
 
     handleFile = (e) => {
-        let imageName = `Processing ${e.target.files[0]['name']} .....`;
+        let userImageText = `Processing ${e.target.files[0]['name']} .....`;
         //start process to process file
         let defaultProcess = document.getElementById('insert');
         let currentProcess = document.getElementById('img_process');
         defaultProcess.style.display = 'none';
         currentProcess.style.display = 'block';
         this.setState({
-            userImageText: imageName
+            userImageText,
+            loading: true,
         })
         let actions = this.props.imageAction;
         let operation_type = actions['user_type'];
@@ -38,7 +44,7 @@ class UploadUi extends React.Component {
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        }else {
+        } else {
             let userImageText = 'Please choose an option';
             this.setState({
                 userImageText
