@@ -5,7 +5,7 @@ import secrets
 REGISTERED_FEATURES = {
     'Web': {
         '1': 'compress',
-        '2': 'resize'
+        '2': 'create_favicon'
     },
     'Android': {
         '1': {'name': 'LDPI', 'size': 36},
@@ -42,7 +42,12 @@ def delete_created_files(list_of_filename=None):
 def create_zip_folder(path=None, list_of_filename=None):
     zip_name = secrets.token_hex(8) + '.zip'
     zip_name = os.path.join(path, zip_name)
-    with zipfile.ZipFile(zip_name, 'w',  compression=zipfile.ZIP_DEFLATED) as file_zip:
+    with zipfile.ZipFile(zip_name, 'w', compression=zipfile.ZIP_DEFLATED) as file_zip:
         for files in list_of_filename:
             file_zip.write(files)
     delete_created_files(list_of_filename)
+
+
+# sizes = {'op_1': (16, 16), 'op_2': (32, 32)}
+# for size in sizes:
+#     print(sizes[size])
