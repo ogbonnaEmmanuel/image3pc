@@ -46,8 +46,3 @@ def create_zip_folder(path=None, list_of_filename=None):
         for files in list_of_filename:
             file_zip.write(files)
     delete_created_files(list_of_filename)
-
-
-# sizes = {'op_1': (16, 16), 'op_2': (32, 32)}
-# for size in sizes:
-#     print(sizes[size])

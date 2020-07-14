@@ -12,8 +12,10 @@ def get_request_to_process():
     user_request = request.form.get('actions')
     selected_request = get_selected_feature(user_request, 'Web')
     perform_request = WebFeatures(user_image)
-    for user_selected_request in selected_request:
-        perform_request.map_feature_to_function(user_selected_request)
+    if len(selected_request) == 1:
+        perform_request.map_feature_to_function(selected_request[0])
+    else:
+        for feature in selected_request:
+            perform_request.map_feature_to_function(feature)
+    perform_request.create_zip_folder()
     return {'success': 'yeah'}
-
-
