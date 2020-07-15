@@ -88,9 +88,9 @@ class UploadUi extends React.Component {
                 });
         } else {
             let userImageText = 'Please select an option';
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 2000);
+            // setTimeout(() => {
+            //     window.location.reload(false);
+            // }, 2000);
             this.process_Started(false);
             this.setState({
                 userImageText,

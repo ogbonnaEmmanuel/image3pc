@@ -22,9 +22,9 @@ export const REGISTERED_FEATURES = {
     },
     Web: {
         'Compress image': {name: 'Compress image', string_rep: '1'},
-        'Resize image': {name: 'Resize image', string_rep: '2'},
-        ALL: ['Compress image', 'Resize image'],
-        SELECT_ALL: {'Compress image': 'Compress image', 'Resize image': 'Resize image'}
+        'Create favicon': {name: 'Create favicon', string_rep: '2'},
+        ALL: ['Compress image', 'Create favicon'],
+        SELECT_ALL: {'Compress image': 'Compress image', 'Create favicon': 'Create favicon'}
     },
     Ios: {
         '@X': {name: '@X', string_rep: '1'},
