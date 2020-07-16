@@ -73,7 +73,7 @@ class UploadUi extends React.Component {
         let userData = this.userData();
         const formData = new FormData();
         formData.append('actions', userData.userAction);
-        formData.append('avatar', userData.fileField.files[0]);
+        formData.append('user_image', userData.fileField.files[0]);
         if (userData.operation_type) {
             fetch(API_URL_MAP[userData.operation_type], {
                 method: 'PUT',

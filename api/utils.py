@@ -1,6 +1,7 @@
 import os
 import zipfile
 import secrets
+from flask import request
 
 REGISTERED_FEATURES = {
     'Web': {
@@ -8,17 +9,17 @@ REGISTERED_FEATURES = {
         '2': 'create_favicon'
     },
     'Android': {
-        '1': {'name': 'LDPI', 'size': 36},
-        '2': {'name': 'MDPI', 'size': 48},
-        '3': {'name': 'HDPI', 'size': 72},
-        '4': {'name': 'XHDPI', 'size': 96},
-        '5': {'name': 'XXHDPI', 'size': 144},
-        '6': {'name': 'XXXHDPI', 'size': 192},
+        '1': {'name': 'LDPI', 'size': (36, 'LDPI')},
+        '2': {'name': 'MDPI', 'size': (48, 'MDPI')},
+        '3': {'name': 'HDPI', 'size': (72, 'HDPI')},
+        '4': {'name': 'XHDPI', 'size': (96, 'XHDPI')},
+        '5': {'name': 'XXHDPI', 'size': (144, 'XXHDPI')},
+        '6': {'name': 'XXXHDPI', 'size': (192, 'XXXHDPI')},
     },
     'Ios': {
-        '1': {'name': '@x', 'size': 100},
-        '2': {'name': '@2x', 'size': 200},
-        '3': {'name': '@3x', 'size': 300},
+        '1': {'name': '@x', 'size': (100, '@X')},
+        '2': {'name': '@2x', 'size': (200, '@2X')},
+        '3': {'name': '@3x', 'size': (300, '@3X')},
     }
 }
 
@@ -46,3 +47,21 @@ def create_zip_folder(path=None, list_of_filename=None):
         for files in list_of_filename:
             file_zip.write(files)
     delete_created_files(list_of_filename)
+
+
+def decouple_user_data(feature_type):
+    user_image = request.files['user_image']
+    user_request = request.form.get('actions')
+    selected_request = get_selected_feature(user_request, feature_type)
+    return user_image, selected_request
+
+
+def generate_location_filename(image_file, image_folder, config_name=None):
+    file_name, ext = os.path.splitext(image_file.filename)
+    if config_name:
+        config_name = f'[{config_name}]'
+        file_name = secrets.token_hex(8) + config_name + ext
+    else:
+        file_name = secrets.token_hex(8) + ext
+    save_location = os.path.join(image_folder, file_name)
+    return save_location
