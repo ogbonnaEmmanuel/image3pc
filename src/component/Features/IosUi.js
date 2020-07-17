@@ -1,34 +1,26 @@
 import React from "react";
 import {REGISTERED_FEATURES} from "./registered_features";
-import {SELECT_ALL_UPDATE} from "./utils";
+import {SINGLE_SELECT_INDICATOR} from "./utils";
 import SelectAllFeatures from "./select_all_features";
+import {connect} from 'react-redux';
 
 class IosUi extends React.Component {
 
     constructor(props) {
         super(props);
         this.action_indicator = this.action_indicator.bind(this);
-        this.state = {
-            select_all: true
-        }
     }
 
     action_indicator = ((e) => {
         let operation = e.target.id;
-        let updateOrNot = this.props.action(operation, 'Ios');
-        if (updateOrNot) {
-            document.getElementById(operation).style.border = "4px solid green";
+        let {user_previous_operation} = this.props
+        if (operation in user_previous_operation) {
+            SINGLE_SELECT_INDICATOR(operation, false)
+            this.props.singleDelete('Ios', operation)
         } else {
-            document.getElementById(operation).style.border = "0px";
+            SINGLE_SELECT_INDICATOR(operation, true)
+            this.props.singleUpdate('Ios', operation)
         }
-    })
-
-    select_all = (() => {
-        let select_all = SELECT_ALL_UPDATE(this.state.select_all, 'Ios');
-        this.setState({
-            select_all
-        })
-        this.props.action(null, 'Ios', 'multi')
     })
 
     render() {
@@ -50,7 +42,7 @@ class IosUi extends React.Component {
                 <div className="center_element">
                     <p className="feature_text">SELECT IMAGE FEATURE FOR IOS</p>
                 </div>
-                <SelectAllFeatures select_all={this.select_all}/>
+                <SelectAllFeatures platform={'Ios'}/>
                 {all_features()}
                 <div className="center_element">
                     <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/"
@@ -63,4 +55,21 @@ class IosUi extends React.Component {
     }
 }
 
-export default IosUi
+const mapStateToProps = (state => {
+    return {
+        user_previous_operation: state.operations.user_selected_operation
+    }
+})
+
+const mapDispatchToProps = (dispatch => {
+    return {
+        singleUpdate: (platform, operation) => {
+            dispatch({type: 'single_update', platform, operation})
+        },
+        singleDelete: (platform, operation) => {
+            dispatch({type: 'single_delete', platform, operation})
+        }
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(IosUi)

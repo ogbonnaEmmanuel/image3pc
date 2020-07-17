@@ -2,8 +2,9 @@ import React from "react";
 import web_image from "../web.png";
 import Android_image from "../android.png";
 import Ios_image from "../ios.png";
+import {connect} from 'react-redux'
 
-class HeaderUi extends React.Component {
+class TabUi extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,7 +28,7 @@ class HeaderUi extends React.Component {
             '3': 'ios_color'
         }
         let userAction = e.target.id;
-        if(userAction in ID_MAP){
+        if (userAction in ID_MAP) {
             userAction = ID_MAP[userAction];
         }
         let prev_tab = this.state.active_tab.tab_name;
@@ -44,7 +45,7 @@ class HeaderUi extends React.Component {
                 }
             })
         }
-        this.props.userFocus(userAction);
+        this.props.update_tab(userAction);
     })
 
     render() {
@@ -77,4 +78,13 @@ class HeaderUi extends React.Component {
     }
 }
 
-export default HeaderUi
+const mapDispatchToProps = (dispatch => {
+    return {
+        update_tab: (tab_name) => dispatch({
+            type: 'update_tab',
+            tab_name: tab_name
+        })
+    }
+})
+
+export default connect(null, mapDispatchToProps)(TabUi)

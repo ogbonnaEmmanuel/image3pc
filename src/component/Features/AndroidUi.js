@@ -1,35 +1,26 @@
 import React from "react";
 import {REGISTERED_FEATURES} from "./registered_features";
-import {SELECT_ALL_UPDATE} from "./utils";
+import {SINGLE_SELECT_INDICATOR} from "./utils";
 import SelectAllFeatures from "./select_all_features";
+import {connect} from 'react-redux'
 
 class AndroidUi extends React.Component {
 
     constructor(props) {
         super(props);
         this.action_indicator = this.action_indicator.bind(this);
-        this.state = {
-            select_all: true
-        }
     }
 
     action_indicator = ((e) => {
         let operation = e.target.id;
-        console.log(operation)
-        let updateOrNot = this.props.action(operation, 'Android');
-        if (updateOrNot) {
-            document.getElementById(operation).style.border = "4px solid green";
+        let {user_previous_operation} = this.props
+        if (operation in user_previous_operation) {
+            SINGLE_SELECT_INDICATOR(operation, false)
+            this.props.singleDelete('Android', operation)
         } else {
-            document.getElementById(operation).style.border = "0px";
+            SINGLE_SELECT_INDICATOR(operation, true)
+            this.props.singleUpdate('Android', operation)
         }
-    })
-
-    select_all = (() => {
-        let select_all = SELECT_ALL_UPDATE(this.state.select_all, 'Android');
-        this.setState({
-            select_all
-        })
-        this.props.action(null, 'Android', 'multi')
     })
 
     render() {
@@ -51,7 +42,7 @@ class AndroidUi extends React.Component {
                 <div className="center_element">
                     <p className="feature_text">SELECT IMAGE FEATURE FOR ANDROID</p>
                 </div>
-                <SelectAllFeatures select_all={this.select_all}/>
+                <SelectAllFeatures platform={'Android'}/>
                 {all_features()}
                 <div className="center_element">
                     <a href="https://developer.android.com/training/multiscreen/screendensities"
@@ -64,4 +55,21 @@ class AndroidUi extends React.Component {
     }
 }
 
-export default AndroidUi
+const mapStateToProps = (state => {
+    return {
+        user_previous_operation: state.operations.user_selected_operation
+    }
+})
+
+const mapDispatchToProps = (dispatch => {
+    return {
+        singleUpdate: (platform, operation) => {
+            dispatch({type: 'single_update', platform, operation})
+        },
+        singleDelete: (platform, operation) => {
+            dispatch({type: 'single_delete', platform, operation})
+        }
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AndroidUi)
