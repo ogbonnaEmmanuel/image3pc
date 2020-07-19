@@ -1,7 +1,8 @@
 import React from "react";
 import {css} from "@emotion/core";
-import {API_URL_MAP, MAP_STRING_TO_DATA} from "./api"
+import {API_URL_MAP, MAP_STRING_TO_DATA} from "../Utils/api"
 import {HashLoader} from "react-spinners";
+import {connect} from 'react-redux';
 
 const override = css`
   display: block;
@@ -26,8 +27,8 @@ class UploadUi extends React.Component {
 
     userData = () => {
         let actions = this.props.imageAction;
-        let operation_type = actions['user_type'];
-        let operations = actions['operations'];
+        let operation_type = actions.platform
+        let operations = actions.user_selected_operation;
         const fileField = document.querySelector('input[type="file"]');
         let userAction = MAP_STRING_TO_DATA(operations, operation_type);
         return {
@@ -37,12 +38,12 @@ class UploadUi extends React.Component {
         }
     }
 
-    generateDownloadUrl(url) {
+
+    generateDownloadUrl(filename) {
         this.setState({
             loading: false
         })
-        console.log('Success:', url);
-        window.location.reload(false);
+        console.log('Success:', filename);
     }
 
     process_Started(Has_it) {
@@ -88,9 +89,9 @@ class UploadUi extends React.Component {
                 });
         } else {
             let userImageText = 'Please select an option';
-            // setTimeout(() => {
-            //     window.location.reload(false);
-            // }, 2000);
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 2000);
             this.process_Started(false);
             this.setState({
                 userImageText,
@@ -141,4 +142,10 @@ class UploadUi extends React.Component {
     }
 }
 
-export default UploadUi
+const mapStateToProps = (state => {
+    return {
+        imageAction: state.operations
+    }
+})
+
+export default connect(mapStateToProps)(UploadUi)

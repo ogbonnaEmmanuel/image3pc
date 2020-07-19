@@ -42,11 +42,12 @@ def delete_created_files(list_of_filename=None):
 
 def create_zip_folder(path=None, list_of_filename=None):
     zip_name = secrets.token_hex(8) + '.zip'
-    zip_name = os.path.join(path, zip_name)
-    with zipfile.ZipFile(zip_name, 'w', compression=zipfile.ZIP_DEFLATED) as file_zip:
+    zip_path = os.path.join(path, zip_name)
+    with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED) as file_zip:
         for files in list_of_filename:
             file_zip.write(files)
     delete_created_files(list_of_filename)
+    return zip_name
 
 
 def decouple_user_data(feature_type):

@@ -1,4 +1,4 @@
-import {REGISTERED_FEATURES} from "../Features/registered_features";
+import {REGISTERED_FEATURES} from "./registered_features";
 
 export const API_URL_MAP = {
     'Web': '/web/',

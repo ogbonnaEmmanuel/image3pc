@@ -1,47 +1,21 @@
 import React from "react";
 import FooterUi from "./StaticUi/footerUi";
-import HeaderUi from "./StaticUi/headerUi";
+import TabUi from "./StaticUi/TabUi";
 import UploadUi from "./StaticUi/upload";
 import ClickedTabUi from "./Features/CurrentTab";
 
 
 class FeatureUi extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentHeaderFocus: 'web_color',
-            operationsOnImage: {
-                user_type: '',
-                operations: {},
-            }
-        }
-    }
-
-
-    updateUserFocus = (currentHeaderFocus => {
-        this.setState({
-            currentHeaderFocus
-        })
-    })
-
-    updateOperation = (operationsOnImage => {
-        this.setState({
-            operationsOnImage
-        })
-    })
-
-
     render() {
         return (
             <section>
                 <section id="feature_ui">
-                    <HeaderUi userFocus={this.updateUserFocus}/>
+                    <TabUi/>
                     <div className="center_element">
                         <div className="features_section">
-                            <ClickedTabUi tab_name={this.state.currentHeaderFocus}
-                                          user_operation={this.updateOperation}/>
-                            <UploadUi imageAction={this.state.operationsOnImage}/>
+                            <ClickedTabUi/>
+                            <UploadUi/>
                         </div>
                     </div>
                 </section>
