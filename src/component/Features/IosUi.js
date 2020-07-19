@@ -1,7 +1,7 @@
 import React from "react";
-import {REGISTERED_FEATURES} from "./registered_features";
-import {SINGLE_SELECT_INDICATOR} from "./utils";
-import SelectAllFeatures from "./select_all_features";
+import {REGISTERED_FEATURES} from "../Utils/registered_features";
+import {SINGLE_SELECT_INDICATOR} from "../Utils/utils";
+import SelectAllFeatures from "../Utils/select_all_features";
 import {connect} from 'react-redux';
 
 class IosUi extends React.Component {

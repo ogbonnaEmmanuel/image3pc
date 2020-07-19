@@ -1,6 +1,6 @@
 import React from "react";
 import {css} from "@emotion/core";
-import {API_URL_MAP, MAP_STRING_TO_DATA} from "./api"
+import {API_URL_MAP, MAP_STRING_TO_DATA} from "../Utils/api"
 import {HashLoader} from "react-spinners";
 import {connect} from 'react-redux';
 
@@ -38,12 +38,12 @@ class UploadUi extends React.Component {
         }
     }
 
-    generateDownloadUrl(url) {
+
+    generateDownloadUrl(filename) {
         this.setState({
             loading: false
         })
-        console.log('Success:', url);
-        window.location.reload(false);
+        console.log('Success:', filename);
     }
 
     process_Started(Has_it) {
@@ -89,9 +89,9 @@ class UploadUi extends React.Component {
                 });
         } else {
             let userImageText = 'Please select an option';
-            // setTimeout(() => {
-            //     window.location.reload(false);
-            // }, 2000);
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 2000);
             this.process_Started(false);
             this.setState({
                 userImageText,
@@ -142,7 +142,7 @@ class UploadUi extends React.Component {
     }
 }
 
-const mapStateToProps = (state =>{
+const mapStateToProps = (state => {
     return {
         imageAction: state.operations
     }
